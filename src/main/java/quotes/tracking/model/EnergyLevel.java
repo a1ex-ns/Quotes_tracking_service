@@ -16,6 +16,10 @@ public class EnergyLevel {
 	private String isin;
 	private Double level;
 	
+	public EnergyLevel() {
+		
+	}
+	
 	public String getIsin() {
 		return isin;
 	}

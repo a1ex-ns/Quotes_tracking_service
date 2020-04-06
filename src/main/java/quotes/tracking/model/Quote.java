@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import quotes.tracking.helper.QuoteFields;
 
 @Entity
+@Table
 public class Quote {
 	
 	@Id
@@ -28,6 +29,13 @@ public class Quote {
 	@Override
 	public String toString() {
 		return id + " " + isin + "  " + bid + " " + ask + " ";
+	}
+	
+    public Quote() {
+    }
+    
+	public Long getId() {
+		return id;
 	}
 	
 	public String getIsin() {

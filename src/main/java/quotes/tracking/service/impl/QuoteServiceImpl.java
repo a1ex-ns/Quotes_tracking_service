@@ -18,10 +18,15 @@ import quotes.tracking.service.QuoteService;
 public class QuoteServiceImpl {
 	Logger logger = Logger.getLogger(QuoteServiceImpl.class.getName());
 	
-	private final QuoteRepository quoteRepository;
+	private QuoteRepository quoteRepository;
 	
+	@Autowired
 	public QuoteServiceImpl(QuoteRepository quoteRepository) {
 		this.quoteRepository = quoteRepository;
+	}
+	
+	public QuoteServiceImpl() {
+		
 	}
 	
 	public void addQuote(Quote quote) {
@@ -39,11 +44,11 @@ public class QuoteServiceImpl {
 	}
 
 //	@Override
-	public Quote getQuote(String isin) {
+	public List<Quote> getQuote(String isin) {
 		System.err.println("find isin " + isin);
 //		System.err.println("FindALL " + quoteRepository.findAll());
 		List<Quote> quote = quoteRepository.findByIsin(isin);
-//		System.err.println("findByIsin(isin) " + quote);
-		return quote.get(0);
+		System.err.println("findByIsin(isin) " + quote);
+		return quote;
 	}
 }

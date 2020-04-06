@@ -28,14 +28,19 @@ import quotes.tracking.service.impl.QuoteServiceImpl;
 public class QuoteController {
 	Logger logger = Logger.getLogger(QuoteController.class.getName());
 	
-	private final QuoteServiceImpl quoteService;
+	private QuoteServiceImpl quoteService;
 	
+	@Autowired
 	public QuoteController(QuoteServiceImpl quoteService) {
 		this.quoteService = quoteService;
 	}
 	
+	public QuoteController() {
+		
+	}
+	
 	@GetMapping(URL.QUOTES)
-	public Quote getAllQuotes(@RequestParam(name = QuoteFields.ISIN, required = true) String isin) {
+	public List<Quote> getAllQuotes(@RequestParam(name = QuoteFields.ISIN, required = true) String isin) {
 //		List<Quote> quotes = (List<Quote>) quoteRepository.findAll();
 //		return quotes != null ? quotes : new ArrayList();
 		System.err.println("@GetMapping(URL.QUOTES)");
