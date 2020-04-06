@@ -4,43 +4,52 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import quotes.tracking.helper.QuoteFields;
 import quotes.tracking.helper.URL;
 import quotes.tracking.model.Quote;
 import quotes.tracking.repository.QuoteRepository;
-import quotes.tracking.service.QuoteService;
+import quotes.tracking.service.impl.QuoteServiceImpl;
 
 @RestController
 public class QuoteController {
 	Logger logger = Logger.getLogger(QuoteController.class.getName());
 	
-	private QuoteService quoteService;
+	private final QuoteServiceImpl quoteService;
 	
-	public QuoteController(QuoteService quoteService) {
+	public QuoteController(QuoteServiceImpl quoteService) {
 		this.quoteService = quoteService;
 	}
 	
 	@GetMapping(URL.QUOTES)
-	public List<Quote> getAllQuotes() {
+	public Quote getAllQuotes(@RequestParam(name = QuoteFields.ISIN, required = true) String isin) {
 //		List<Quote> quotes = (List<Quote>) quoteRepository.findAll();
 //		return quotes != null ? quotes : new ArrayList();
-		return null;
+		System.err.println("@GetMapping(URL.QUOTES)");
+		
+		return quoteService.getQuote(isin);
 	}
 	
 	@PostMapping(URL.QUOTES)
 	public void addNewQuote(@RequestBody Quote quote) {
 		quoteService.addQuote(quote);
 	}
+	
+	
+	
 	
 //	private int counter = 4;
 //	

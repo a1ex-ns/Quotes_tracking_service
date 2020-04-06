@@ -1,24 +1,29 @@
 package quotes.tracking.model;
 
-import java.util.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import quotes.tracking.helper.QuoteFields;
+
 @Entity
-@Table
 public class Quote {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
+	
+	@Column
 	private String isin;
+	
+	@Column
 	private Double bid;
+	
+	@Column
 	private Double ask;
-	private Date time;
 	
 	@Override
 	public String toString() {
@@ -47,13 +52,5 @@ public class Quote {
 
 	public void setAsk(Double ask) {
 		this.ask = ask;
-	}
-
-	public Date getTime() {
-		return time;
-	}
-
-	public void Date(Date time) {
-		this.time = time;
 	}
 }

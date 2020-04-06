@@ -1,9 +1,14 @@
 package quotes.tracking.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import quotes.tracking.model.Quote;
 
-public interface QuoteRepository extends CrudRepository<Quote, Long> {
-
+@Repository
+public interface QuoteRepository extends JpaRepository<Quote, Long> {
+	
+	List<Quote> findByIsin(String isin);
 }

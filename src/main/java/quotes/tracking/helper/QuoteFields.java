@@ -1,8 +1,8 @@
 package quotes.tracking.helper;
 
-public class Quote {
+public class QuoteFields {
 	
-	private Quote() {
+	private QuoteFields() {
 		throw new IllegalStateException("Сonstructor is not provided");
 	}
 	
