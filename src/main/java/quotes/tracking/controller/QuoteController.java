@@ -22,16 +22,16 @@ import quotes.tracking.helper.QuoteFields;
 import quotes.tracking.helper.URL;
 import quotes.tracking.model.Quote;
 import quotes.tracking.repository.QuoteRepository;
-import quotes.tracking.service.impl.QuoteServiceImpl;
+import quotes.tracking.service.QuoteService;
 
 @RestController
 public class QuoteController {
 	Logger logger = Logger.getLogger(QuoteController.class.getName());
 	
-	private QuoteServiceImpl quoteService;
+	private QuoteService quoteService;
 	
 	@Autowired
-	public QuoteController(QuoteServiceImpl quoteService) {
+	public QuoteController(QuoteService quoteService) {
 		this.quoteService = quoteService;
 	}
 	
@@ -40,21 +40,16 @@ public class QuoteController {
 	}
 	
 	@GetMapping(URL.QUOTES)
-	public List<Quote> getAllQuotes(@RequestParam(name = QuoteFields.ISIN, required = true) String isin) {
-//		List<Quote> quotes = (List<Quote>) quoteRepository.findAll();
-//		return quotes != null ? quotes : new ArrayList();
+	public void getAllQuotes(@RequestParam(name = QuoteFields.ISIN, required = true) String isin) {
 		System.err.println("@GetMapping(URL.QUOTES)");
 		
-		return quoteService.getQuote(isin);
+//		return quoteService.getQuote(isin);
 	}
 	
 	@PostMapping(URL.QUOTES)
 	public void addNewQuote(@RequestBody Quote quote) {
 		quoteService.addQuote(quote);
 	}
-	
-	
-	
 	
 //	private int counter = 4;
 //	
