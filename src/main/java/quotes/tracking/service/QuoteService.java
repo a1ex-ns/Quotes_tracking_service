@@ -6,6 +6,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,16 +38,17 @@ public class QuoteService {
 			logger.log(Level.WARNING, "The quote {} is not valid.", quote);
 		}
 	}
-
-	public void save(Quote quote) {
-		quoteRepository.save(quote);
+	
+	@Transactional
+	public void update() {
+		quoteRepository.setQuoteInfoByIsin((double) 500, (double) 500, "zzzz11112222");
 	}
 	
 	public boolean checkQuote(String isin) {
 		return getQuote(isin).isPresent();
 	}
 
-	private Optional<Quote> getQuote(String isin) {
+	public Optional<Quote> getQuote(String isin) {
 		return quoteRepository.findByIsin(isin);
 	}
 }

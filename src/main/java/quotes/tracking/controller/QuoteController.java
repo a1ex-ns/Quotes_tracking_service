@@ -40,15 +40,20 @@ public class QuoteController {
 	}
 	
 	@GetMapping(URL.QUOTES)
-	public void getAllQuotes(@RequestParam(name = QuoteFields.ISIN, required = true) String isin) {
+	public Optional<Quote> getAllQuotes(@RequestParam(name = QuoteFields.ISIN, required = true) String isin) {
 		System.err.println("@GetMapping(URL.QUOTES)");
 		
-//		return quoteService.getQuote(isin);
+		return quoteService.getQuote(isin);
 	}
 	
 	@PostMapping(URL.QUOTES)
 	public void addNewQuote(@RequestBody Quote quote) {
 		quoteService.addQuote(quote);
+	}
+	
+	@GetMapping("/update")
+	public void update() {
+		quoteService.update();
 	}
 	
 //	private int counter = 4;
