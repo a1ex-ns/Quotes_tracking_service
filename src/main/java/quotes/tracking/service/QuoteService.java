@@ -46,31 +46,17 @@ public class QuoteService {
 				quote.setAsk(newQuote.getAsk());
 				quote.setBid(newQuote.getBid());
 				quote.getEnergyLevel().setElvl(EnergyLevelCalculation.elvlCalculation(newQuote, quote.getEnergyLevel().getElvl()));
-				quoteRepository.save(quote);
+				saveQuote(quote);
 			} else {
 				EnergyLevel energyLevel = new EnergyLevel();
 				energyLevel.setElvl(EnergyLevelCalculation.elvlCalculation(newQuote, null));
+//				energyLevel.setIsin(newQuote.getIsin());
 				newQuote.setEnergyLevel(energyLevel);
-				quoteRepository.save(newQuote);
+				saveQuote(newQuote);
 			}
 		} else {
 			logger.log(Level.WARNING, "The quote {} is not valid.", newQuote);
 		}
-		
-		
-//		if (QuoteValidator.isValid(quote)) {
-//			String isin = quote.getIsin();
-//			if (checkQuote(isin)) {
-//				quoteRepository.setQuoteInfoByIsin(quote.getAsk(), quote.getBid(), isin);
-//			} else {
-//				EnergyLevel energyLevel = new EnergyLevel();
-//				energyLevel.setElvl(500.0);
-//				quote.setEnergyLevel(energyLevel);
-//				quoteRepository.save(quote);
-//			}
-//		} else {
-//			logger.log(Level.WARNING, "The quote {} is not valid.", quote);
-//		}
 	}
 	
 //	@Transactional
@@ -78,10 +64,10 @@ public class QuoteService {
 //		quoteRepository.setQuoteInfoByIsin((double) 500, (double) 500, "zzzz11112222");
 //	}
 	
-	public boolean checkQuote(String isin) {
-		return getQuote(isin).isPresent();
+	public void saveQuote(Quote quote) {
+		quoteRepository.save(quote);
 	}
-
+	
 	public Optional<Quote> getQuote(String isin) {
 		return quoteRepository.findByIsin(isin);
 	}

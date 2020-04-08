@@ -22,7 +22,6 @@ import quotes.tracking.helper.QuoteFields;
 import quotes.tracking.helper.URL;
 import quotes.tracking.model.EnergyLevel;
 import quotes.tracking.model.Quote;
-import quotes.tracking.repository.EnergyLevelRepository;
 import quotes.tracking.repository.QuoteRepository;
 import quotes.tracking.service.QuoteService;
 
@@ -36,12 +35,12 @@ public class QuoteController {
 	Logger logger = Logger.getLogger(QuoteController.class.getName());
 	
 	private QuoteService quoteService;
-	private EnergyLevelRepository energyLevelRepository;
+//	private EnergyLevelRepository energyLevelRepository;
 	
 	@Autowired
-	public QuoteController(QuoteService quoteService, EnergyLevelRepository energyLevelRepository) {
+	public QuoteController(QuoteService quoteService) {
 		this.quoteService = quoteService;
-		this.energyLevelRepository = energyLevelRepository;
+//		this.energyLevelRepository = energyLevelRepository;
 	}
 	
 	public QuoteController() {

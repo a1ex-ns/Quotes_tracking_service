@@ -28,8 +28,8 @@ public class EnergyLevel {
 	@OneToOne(optional = false, mappedBy = QuoteFields.ENERGY_LEVEL, cascade = CascadeType.ALL)
 	private Quote quote;
 	
-	@Column
-	private String isin;
+//	@Column
+//	private String isin;
 	
 	@Column
 	private Double elvl;
@@ -50,13 +50,13 @@ public class EnergyLevel {
 		return id;
 	}
 	
-	public String getIsin() {
-		return isin;
-	}
-	
-	public void setIsin(String isin) {
-		this.isin = isin;
-	}
+//	public String getIsin() {
+//		return isin;
+//	}
+//	
+//	public void setIsin(String isin) {
+//		this.isin = isin;
+//	}
 	
 	public Double getElvl() {
 		return elvl;
