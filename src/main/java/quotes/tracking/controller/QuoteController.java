@@ -17,22 +17,22 @@ import quotes.tracking.service.QuoteService;
 @RestController
 public class QuoteController {
 	
-	private QuoteService quoteService;
-	
-	@Autowired
-	public QuoteController(QuoteService quoteService) {
-		this.quoteService = quoteService;
-	}
-	
-	public QuoteController() {
-		
-	}
-	
-	/**
-	 * Accepts and processes quotes.
-	 */
-	@PostMapping(URL.QUOTES)
-	public void addQuote(@RequestBody Quote quote) {
-		quoteService.addQuote(quote);
-	}
+    private QuoteService quoteService;
+    
+    @Autowired
+    public QuoteController(QuoteService quoteService) {
+    	this.quoteService = quoteService;
+    }
+    
+    public QuoteController() {
+    	
+    }
+    
+    /**
+     * Accepts and processes quotes.
+     */
+    @PostMapping(URL.QUOTES)
+    public void addQuote(@RequestBody Quote quote) {
+    	quoteService.addQuote(quote);
+    }
 }

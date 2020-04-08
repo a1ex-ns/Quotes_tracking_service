@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class QuotesTrackingServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(QuotesTrackingServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(QuotesTrackingServiceApplication.class, args);
+    }
 }

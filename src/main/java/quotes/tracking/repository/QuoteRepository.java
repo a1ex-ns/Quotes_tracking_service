@@ -13,5 +13,5 @@ import quotes.tracking.model.Quote;
 @Repository
 public interface QuoteRepository extends CrudRepository<Quote, Long> {
 	
-	Optional<Quote> findByIsin(String isin);
+    Optional<Quote> findByIsin(String isin);
 }
