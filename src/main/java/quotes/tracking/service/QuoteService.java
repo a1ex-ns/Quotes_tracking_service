@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import quotes.tracking.helper.EnergyLevelCalculation;
 import quotes.tracking.helper.QuoteValidator;
 import quotes.tracking.model.EnergyLevel;
 import quotes.tracking.model.Quote;
@@ -26,10 +27,10 @@ public class QuoteService {
 	Logger logger = Logger.getLogger(QuoteService.class.getName());
 	
 	private QuoteRepository quoteRepository;
-	private EnergyLevelCalculationService energyLevelCalculationService;
+	private EnergyLevelCalculation energyLevelCalculationService;
 	
 	@Autowired
-	public QuoteService(QuoteRepository quoteRepository, EnergyLevelCalculationService energyLevelCalculationService) {
+	public QuoteService(QuoteRepository quoteRepository, EnergyLevelCalculation energyLevelCalculationService) {
 		this.quoteRepository = quoteRepository;
 		this.energyLevelCalculationService = energyLevelCalculationService;
 	}
