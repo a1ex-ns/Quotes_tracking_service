@@ -1,7 +1,5 @@
 package quotes.tracking.controller;
 
-import java.util.logging.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +16,6 @@ import quotes.tracking.service.QuoteService;
  */
 @RestController
 public class QuoteController {
-	Logger logger = Logger.getLogger(QuoteController.class.getName());
 	
 	private QuoteService quoteService;
 	

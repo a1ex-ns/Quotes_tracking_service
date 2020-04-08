@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import quotes.tracking.helper.QuoteFields;
-
 /**
  * @author Alexey Savchenko
  */
@@ -37,12 +35,21 @@ public class Quote {
 	@Column
 	private Double ask;
 	
-	@Override
-	public String toString() {
-		return id + " " + isin + "  " + bid + " " + ask + " ";
+	public String getElvl() {
+		return "Quote isin =".concat(isin).concat(" energyLevel = ".concat(energyLevel.getElvl().toString()));
 	}
 	
+	@Override
+	public String toString() {
+		return "Quote isin = " + isin
+				+ "bid = " + bid
+				+ "ask = " + ask
+				+ "elvl = " + energyLevel.getElvl().toString();
+	}
+	
+	
     public Quote() {
+    	
     }
     
 	public EnergyLevel getEnergyLevel() {
@@ -123,6 +130,4 @@ public class Quote {
 			return false;
 		return true;
 	}
-	
-	
 }

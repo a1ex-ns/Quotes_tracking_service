@@ -53,6 +53,7 @@ public class QuoteService {
 				energyLevel.setElvl(EnergyLevelCalculation.elvlCalculation(newQuote));
 				newQuote.setEnergyLevel(energyLevel);
 				saveQuote(newQuote);
+				logger.log(Level.INFO, "Save new quote {}", newQuote);
 			}
 		} else {
 			logger.log(Level.WARNING, "The quote {} is not valid.", newQuote);

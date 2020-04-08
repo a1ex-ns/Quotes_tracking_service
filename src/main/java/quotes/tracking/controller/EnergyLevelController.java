@@ -3,7 +3,6 @@ package quotes.tracking.controller;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +21,6 @@ import quotes.tracking.repository.QuoteRepository;
  */
 @RestController
 public class EnergyLevelController {
-	Logger logger = Logger.getLogger(EnergyLevelController.class.getName());
 	
 	public EnergyLevelController() {
 		
@@ -43,7 +41,7 @@ public class EnergyLevelController {
 	@GetMapping(URL.ENERGY_LEVEL)
 	public String getEnergyLevelByIsin(@RequestParam(name = QuoteFields.ISIN, required = true) String isin) {
 		Optional<Quote> quote = quoteRepository.findByIsin(isin);
-		return quote.isPresent() ? quote.get().getIsin() + " " + quote.get().getEnergyLevel().getElvl() : "Quote not foind!";
+		return quote.isPresent() ? quote.get().getElvl() : "Quote not found!";
 	}
 	
 	/**
