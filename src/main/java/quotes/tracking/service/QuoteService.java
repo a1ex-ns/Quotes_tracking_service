@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import quotes.tracking.helper.QuoteValidator;
+import quotes.tracking.model.EnergyLevel;
 import quotes.tracking.model.Quote;
 import quotes.tracking.repository.QuoteRepository;
 
@@ -25,10 +26,12 @@ public class QuoteService {
 	Logger logger = Logger.getLogger(QuoteService.class.getName());
 	
 	private QuoteRepository quoteRepository;
+	private EnergyLevelCalculationService energyLevelCalculationService;
 	
 	@Autowired
-	public QuoteService(QuoteRepository quoteRepository) {
+	public QuoteService(QuoteRepository quoteRepository, EnergyLevelCalculationService energyLevelCalculationService) {
 		this.quoteRepository = quoteRepository;
+		this.energyLevelCalculationService = energyLevelCalculationService;
 	}
 	
 	public QuoteService() {
@@ -42,6 +45,9 @@ public class QuoteService {
 			if (checkQuote(isin)) {
 				quoteRepository.setQuoteInfoByIsin(quote.getAsk(), quote.getBid(), isin);
 			} else {
+				EnergyLevel energyLevel = new EnergyLevel();
+				energyLevel.setElvl(500.0);
+				quote.setEnergyLevel(energyLevel);
 				quoteRepository.save(quote);
 			}
 		} else {

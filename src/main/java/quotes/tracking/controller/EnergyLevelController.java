@@ -1,5 +1,9 @@
 package quotes.tracking.controller;
 
+import java.util.Optional;
+
+import quotes.tracking.model.Quote;
+
 /**
  * 
  * 

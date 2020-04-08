@@ -26,9 +26,8 @@ public class Quote {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
-//	@Column
     @OneToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "energyLevel_elvl")
+    @JoinColumn(name = "energyLevel_id")
 	private EnergyLevel energyLevel;
     
     @Column
