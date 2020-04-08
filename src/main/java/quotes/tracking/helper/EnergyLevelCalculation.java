@@ -1,7 +1,5 @@
 package quotes.tracking.helper;
 
-import org.springframework.stereotype.Service;
-
 import quotes.tracking.model.Quote;
 
 /**
@@ -10,6 +8,10 @@ import quotes.tracking.model.Quote;
  * @author Alexey Savchenko
  */
 public class EnergyLevelCalculation {
+	
+	  private EnergyLevelCalculation() {
+		    throw new IllegalStateException("Сonstructor is not provided");
+		  }
 	
 	public static Double elvlCalculation(Quote quote, Double currentElvl) {
 		if (currentElvl == null && quote.getBid() != null) {

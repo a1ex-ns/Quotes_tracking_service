@@ -27,12 +27,10 @@ public class QuoteService {
 	Logger logger = Logger.getLogger(QuoteService.class.getName());
 	
 	private QuoteRepository quoteRepository;
-	private EnergyLevelCalculation energyLevelCalculationService;
 	
 	@Autowired
-	public QuoteService(QuoteRepository quoteRepository, EnergyLevelCalculation energyLevelCalculationService) {
+	public QuoteService(QuoteRepository quoteRepository) {
 		this.quoteRepository = quoteRepository;
-		this.energyLevelCalculationService = energyLevelCalculationService;
 	}
 	
 	public QuoteService() {
@@ -40,20 +38,39 @@ public class QuoteService {
 	}
 	
 	@Transactional
-	public void addQuote(Quote quote) {
-		if (QuoteValidator.isValid(quote)) {
-			String isin = quote.getIsin();
-			if (checkQuote(isin)) {
-				quoteRepository.setQuoteInfoByIsin(quote.getAsk(), quote.getBid(), isin);
+	public void addQuote(Quote newQuote) {
+		if (QuoteValidator.isValid(newQuote)) {
+			Optional<Quote> optionslQuote = getQuote(newQuote.getIsin());
+			if (optionslQuote.isPresent()) {
+				Quote quote = optionslQuote.get();
+				quote.setAsk(newQuote.getAsk());
+				quote.setBid(newQuote.getBid());
+				quote.getEnergyLevel().setElvl(EnergyLevelCalculation.elvlCalculation(newQuote, quote.getEnergyLevel().getElvl()));
+				quoteRepository.save(quote);
 			} else {
 				EnergyLevel energyLevel = new EnergyLevel();
-				energyLevel.setElvl(500.0);
-				quote.setEnergyLevel(energyLevel);
-				quoteRepository.save(quote);
+				energyLevel.setElvl(EnergyLevelCalculation.elvlCalculation(newQuote, null));
+				newQuote.setEnergyLevel(energyLevel);
+				quoteRepository.save(newQuote);
 			}
 		} else {
-			logger.log(Level.WARNING, "The quote {} is not valid.", quote);
+			logger.log(Level.WARNING, "The quote {} is not valid.", newQuote);
 		}
+		
+		
+//		if (QuoteValidator.isValid(quote)) {
+//			String isin = quote.getIsin();
+//			if (checkQuote(isin)) {
+//				quoteRepository.setQuoteInfoByIsin(quote.getAsk(), quote.getBid(), isin);
+//			} else {
+//				EnergyLevel energyLevel = new EnergyLevel();
+//				energyLevel.setElvl(500.0);
+//				quote.setEnergyLevel(energyLevel);
+//				quoteRepository.save(quote);
+//			}
+//		} else {
+//			logger.log(Level.WARNING, "The quote {} is not valid.", quote);
+//		}
 	}
 	
 //	@Transactional
