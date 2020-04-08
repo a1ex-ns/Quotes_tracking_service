@@ -20,19 +20,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import quotes.tracking.helper.QuoteFields;
 import quotes.tracking.helper.URL;
+import quotes.tracking.model.EnergyLevel;
 import quotes.tracking.model.Quote;
+import quotes.tracking.repository.EnergyLevelRepository;
 import quotes.tracking.repository.QuoteRepository;
 import quotes.tracking.service.QuoteService;
 
+/**
+ * 
+ * 
+ * @author Alexey Savchenko
+ */
 @RestController
 public class QuoteController {
 	Logger logger = Logger.getLogger(QuoteController.class.getName());
 	
 	private QuoteService quoteService;
+	private EnergyLevelRepository energyLevelRepository;
 	
 	@Autowired
-	public QuoteController(QuoteService quoteService) {
+	public QuoteController(QuoteService quoteService, EnergyLevelRepository energyLevelRepository) {
 		this.quoteService = quoteService;
+		this.energyLevelRepository = energyLevelRepository;
 	}
 	
 	public QuoteController() {
@@ -51,10 +60,15 @@ public class QuoteController {
 		quoteService.addQuote(quote);
 	}
 	
-	@GetMapping("/update")
-	public void update() {
-		quoteService.update();
-	}
+//	@PostMapping(URL.QUOTES)
+//	public void addNewQuote(@RequestBody EnergyLevel energyLevel) {
+//		energyLevelRepository.save(energyLevel);
+//	}
+	
+//	@GetMapping("/update")
+//	public void update() {
+//		quoteService.update();
+//	}
 	
 //	private int counter = 4;
 //	

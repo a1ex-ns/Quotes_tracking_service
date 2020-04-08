@@ -1,24 +1,38 @@
 package quotes.tracking.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import quotes.tracking.helper.QuoteFields;
 
+/**
+ * 
+ * 
+ * @author Alexey Savchenko
+ */
 @Entity
 @Table
 public class Quote {
 	
 	@Id
+	@Column
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
-	@Column
-	private String isin;
+//	@Column
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "energyLevel_elvl")
+	private EnergyLevel energyLevel;
+    
+    @Column
+    private String isin;
 	
 	@Column
 	private Double bid;
@@ -34,6 +48,14 @@ public class Quote {
     public Quote() {
     }
     
+	public EnergyLevel getEnergyLevel() {
+		return energyLevel;
+	}
+
+	public void setEnergyLevel(EnergyLevel energyLevel) {
+		this.energyLevel = energyLevel;
+	}
+
 	public Long getId() {
 		return id;
 	}

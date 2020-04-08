@@ -15,6 +15,11 @@ import quotes.tracking.helper.QuoteValidator;
 import quotes.tracking.model.Quote;
 import quotes.tracking.repository.QuoteRepository;
 
+/**
+ * 
+ * 
+ * @author Alexey Savchenko
+ */
 @Service
 public class QuoteService {
 	Logger logger = Logger.getLogger(QuoteService.class.getName());
@@ -30,19 +35,24 @@ public class QuoteService {
 		
 	}
 	
+	@Transactional
 	public void addQuote(Quote quote) {
 		if (QuoteValidator.isValid(quote)) {
-			logger.log(Level.INFO, "quote.toString() = " + quote.toString()); //REFACTORING
-			quoteRepository.save(quote);
+			String isin = quote.getIsin();
+			if (checkQuote(isin)) {
+				quoteRepository.setQuoteInfoByIsin(quote.getAsk(), quote.getBid(), isin);
+			} else {
+				quoteRepository.save(quote);
+			}
 		} else {
 			logger.log(Level.WARNING, "The quote {} is not valid.", quote);
 		}
 	}
 	
-	@Transactional
-	public void update() {
-		quoteRepository.setQuoteInfoByIsin((double) 500, (double) 500, "zzzz11112222");
-	}
+//	@Transactional
+//	public void update() {
+//		quoteRepository.setQuoteInfoByIsin((double) 500, (double) 500, "zzzz11112222");
+//	}
 	
 	public boolean checkQuote(String isin) {
 		return getQuote(isin).isPresent();

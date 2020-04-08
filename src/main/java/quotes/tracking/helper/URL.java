@@ -1,5 +1,10 @@
 package quotes.tracking.helper;
 
+/**
+ * 
+ * 
+ * @author Alexey Savchenko
+ */
 public class URL {
 
 	private URL() {

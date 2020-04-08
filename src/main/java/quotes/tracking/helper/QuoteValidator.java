@@ -2,6 +2,11 @@ package quotes.tracking.helper;
 
 import quotes.tracking.model.Quote;
 
+/**
+ * 
+ * 
+ * @author Alexey Savchenko
+ */
 public class QuoteValidator {
 	private static final int QUOTE_ISIN_LENGHT = 12; 
 	
