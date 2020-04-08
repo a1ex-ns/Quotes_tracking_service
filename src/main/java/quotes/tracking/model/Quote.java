@@ -47,7 +47,6 @@ public class Quote {
     			+ "elvl = " + energyLevel.getElvl().toString();
     }
     
-    
     public Quote() {
     	
     }

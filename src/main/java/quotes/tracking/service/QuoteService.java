@@ -36,7 +36,7 @@ public class QuoteService {
     }
     
     /**
-     * Adds a new quote or changes the value of the old one, if such a quota exists.
+     * Adds a new quote or changes the value of the old one, if such a quote exists.
      */
     @Transactional
     public void addQuote(Quote newQuote) {
@@ -48,6 +48,7 @@ public class QuoteService {
     			quote.setBid(newQuote.getBid());
     			quote.getEnergyLevel().setElvl(EnergyLevelCalculation.elvlCalculation(quote));
     			saveQuote(quote);
+    			logger.log(Level.INFO, "Quote changed {}", newQuote);
     		} else {
     			EnergyLevel energyLevel = new EnergyLevel();
     			energyLevel.setElvl(EnergyLevelCalculation.elvlCalculation(newQuote));

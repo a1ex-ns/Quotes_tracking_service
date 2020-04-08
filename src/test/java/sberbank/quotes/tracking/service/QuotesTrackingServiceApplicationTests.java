@@ -1,4 +1,4 @@
-package sberbank.quotestrackingservice;
+package sberbank.quotes.tracking.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
