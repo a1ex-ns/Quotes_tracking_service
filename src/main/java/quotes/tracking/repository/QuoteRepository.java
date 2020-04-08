@@ -13,16 +13,10 @@ import quotes.tracking.helper.QuoteFields;
 import quotes.tracking.model.Quote;
 
 /**
- * 
- * 
  * @author Alexey Savchenko
  */
 @Repository
 public interface QuoteRepository extends CrudRepository<Quote, Long> {
 	
 	Optional<Quote> findByIsin(String isin);
-	
-	@Modifying
-	@Query("update Quote u set u." + QuoteFields.ASK + " = ?1, u." + QuoteFields.BID + " = ?2 where u." + QuoteFields.ISIN +" = ?3")
-	void setQuoteInfoByIsin(double ask, double bid, String isin);
 }

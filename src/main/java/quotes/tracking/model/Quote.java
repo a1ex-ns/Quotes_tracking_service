@@ -13,8 +13,6 @@ import javax.persistence.Table;
 import quotes.tracking.helper.QuoteFields;
 
 /**
- * 
- * 
  * @author Alexey Savchenko
  */
 @Entity
@@ -82,4 +80,49 @@ public class Quote {
 	public void setAsk(Double ask) {
 		this.ask = ask;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ask == null) ? 0 : ask.hashCode());
+		result = prime * result + ((bid == null) ? 0 : bid.hashCode());
+		result = prime * result + ((energyLevel == null) ? 0 : energyLevel.hashCode());
+		result = prime * result + ((isin == null) ? 0 : isin.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Quote other = (Quote) obj;
+		if (ask == null) {
+			if (other.ask != null)
+				return false;
+		} else if (!ask.equals(other.ask))
+			return false;
+		if (bid == null) {
+			if (other.bid != null)
+				return false;
+		} else if (!bid.equals(other.bid))
+			return false;
+		if (energyLevel == null) {
+			if (other.energyLevel != null)
+				return false;
+		} else if (!energyLevel.equals(other.energyLevel))
+			return false;
+		if (isin == null) {
+			if (other.isin != null)
+				return false;
+		} else if (!isin.equals(other.isin))
+			return false;
+		return true;
+	}
+	
+	
 }

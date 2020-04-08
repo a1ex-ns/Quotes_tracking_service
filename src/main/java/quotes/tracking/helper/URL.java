@@ -1,7 +1,7 @@
 package quotes.tracking.helper;
 
 /**
- * 
+ * Helper class for storing URLs processed by controllers.
  * 
  * @author Alexey Savchenko
  */

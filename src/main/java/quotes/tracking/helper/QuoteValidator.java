@@ -3,7 +3,7 @@ package quotes.tracking.helper;
 import quotes.tracking.model.Quote;
 
 /**
- * 
+ * The class is responsible for validating quotes.
  * 
  * @author Alexey Savchenko
  */
@@ -15,11 +15,11 @@ public class QuoteValidator {
 	}
 	
 	/**
-	 * Метод отвечает за валидацию котировки
+	 * Сhecks the quote for validity.
 	 * 
-	 * @param quote котривка
-	 * @return <b>true</b> - все норм <br>
-	 * 		   <b>false</b> - не не норм
+	 * @param quote quotation which requires verification
+	 * @return <b>true</b> - the quote is valid <br>
+	 * 		   <b>false</b> - the quote is not valid
 	 */
 	public static boolean isValid(Quote quote) {
 		return quote.getBid() != null

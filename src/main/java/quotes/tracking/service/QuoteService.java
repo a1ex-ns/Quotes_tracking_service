@@ -1,8 +1,6 @@
 package quotes.tracking.service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +16,7 @@ import quotes.tracking.model.Quote;
 import quotes.tracking.repository.QuoteRepository;
 
 /**
- * 
+ * Service for processing {@link Quote}.
  * 
  * @author Alexey Savchenko
  */
@@ -37,20 +35,22 @@ public class QuoteService {
 		
 	}
 	
+	/**
+	 * Adds a new quote or changes the value of the old one, if such a quota exists.
+	 */
 	@Transactional
 	public void addQuote(Quote newQuote) {
 		if (QuoteValidator.isValid(newQuote)) {
-			Optional<Quote> optionslQuote = getQuote(newQuote.getIsin());
-			if (optionslQuote.isPresent()) {
-				Quote quote = optionslQuote.get();
+			Optional<Quote> optQuote = getQuote(newQuote.getIsin());
+			if (optQuote.isPresent() && !optQuote.get().equals(newQuote)) {
+				Quote quote = optQuote.get();
 				quote.setAsk(newQuote.getAsk());
 				quote.setBid(newQuote.getBid());
-				quote.getEnergyLevel().setElvl(EnergyLevelCalculation.elvlCalculation(newQuote, quote.getEnergyLevel().getElvl()));
+				quote.getEnergyLevel().setElvl(EnergyLevelCalculation.elvlCalculation(quote));
 				saveQuote(quote);
 			} else {
 				EnergyLevel energyLevel = new EnergyLevel();
-				energyLevel.setElvl(EnergyLevelCalculation.elvlCalculation(newQuote, null));
-//				energyLevel.setIsin(newQuote.getIsin());
+				energyLevel.setElvl(EnergyLevelCalculation.elvlCalculation(newQuote));
 				newQuote.setEnergyLevel(energyLevel);
 				saveQuote(newQuote);
 			}
@@ -59,16 +59,11 @@ public class QuoteService {
 		}
 	}
 	
-//	@Transactional
-//	public void update() {
-//		quoteRepository.setQuoteInfoByIsin((double) 500, (double) 500, "zzzz11112222");
-//	}
-	
-	public void saveQuote(Quote quote) {
+	private void saveQuote(Quote quote) {
 		quoteRepository.save(quote);
 	}
 	
-	public Optional<Quote> getQuote(String isin) {
+	private Optional<Quote> getQuote(String isin) {
 		return quoteRepository.findByIsin(isin);
 	}
 }

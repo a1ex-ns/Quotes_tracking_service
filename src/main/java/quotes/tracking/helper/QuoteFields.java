@@ -1,7 +1,8 @@
 package quotes.tracking.helper;
 
 /**
- * 
+ * Helper class with {@link Quote} fields.
+ * <br><b>This class must be changed when changing fields in the {@link Quote}.</b>
  * 
  * @author Alexey Savchenko
  */
