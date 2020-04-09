@@ -40,14 +40,6 @@ public class EnergyLevel {
     	
     }
     
-//    public Quote getQuote() {
-//    	return quote;
-//    }
-//    
-//    public void setQuote(Quote quote) {
-//    	this.quote = quote;
-//    }
-    
     public Long getId() {
     	return id;
     }
