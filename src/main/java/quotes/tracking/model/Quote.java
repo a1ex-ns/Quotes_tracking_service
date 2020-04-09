@@ -37,9 +37,11 @@ public class Quote {
     private String isin;
     
     @Column
+    @JsonIgnore
     private Double bid;
     
     @Column
+    @JsonIgnore
     private Double ask;
     
     @Override
