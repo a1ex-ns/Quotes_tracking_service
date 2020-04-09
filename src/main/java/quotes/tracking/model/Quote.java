@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author Alexey Savchenko
  */
@@ -22,6 +24,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class Quote {
 	
     @Id
+    @JsonIgnore
     @Column
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -38,10 +41,6 @@ public class Quote {
     
     @Column
     private Double ask;
-    
-    public String getElvl() {
-    	return "Quote isin =".concat(isin).concat(" energyLevel = ".concat(energyLevel.getElvl().toString()));
-    }
     
     @Override
     public String toString() {

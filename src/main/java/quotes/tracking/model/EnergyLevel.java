@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import quotes.tracking.helper.QuoteFields;
 
 /**
@@ -24,6 +26,7 @@ public class EnergyLevel {
 	
     @Id
     @Column
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     
@@ -37,13 +40,13 @@ public class EnergyLevel {
     	
     }
     
-    public Quote getQuote() {
-    	return quote;
-    }
-    
-    public void setQuote(Quote quote) {
-    	this.quote = quote;
-    }
+//    public Quote getQuote() {
+//    	return quote;
+//    }
+//    
+//    public void setQuote(Quote quote) {
+//    	this.quote = quote;
+//    }
     
     public Long getId() {
     	return id;
