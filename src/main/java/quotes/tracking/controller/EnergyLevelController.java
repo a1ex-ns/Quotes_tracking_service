@@ -38,10 +38,16 @@ public class EnergyLevelController {
      * 
      * @param isin quote isin name
      */
+//    @GetMapping(URL.ENERGY_LEVEL)
+//    public String getEnergyLevelByIsin(@RequestParam(name = QuoteFields.ISIN, required = true) String isin) {
+//    	Optional<Quote> quote = quoteRepository.findByIsin(isin);
+//    	return quote.isPresent() ? quote.get().getElvl() : "Quote not found!";
+//    }
+    
     @GetMapping(URL.ENERGY_LEVEL)
     public String getEnergyLevelByIsin(@RequestParam(name = QuoteFields.ISIN, required = true) String isin) {
-    	Optional<Quote> quote = quoteRepository.findByIsin(isin);
-    	return quote.isPresent() ? quote.get().getElvl() : "Quote not found!";
+        Optional<Quote> quote = quoteRepository.findByIsin(isin);
+        return quote.get().getElvl();
     }
     
     /**

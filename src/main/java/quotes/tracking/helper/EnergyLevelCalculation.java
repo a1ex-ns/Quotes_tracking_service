@@ -19,7 +19,7 @@ public class EnergyLevelCalculation {
      * @param quote for which it is necessary to calculate the value.
      */
     public static Double elvlCalculation(Quote quote) {
-    	Double currentElvl = quote.getEnergyLevel().getElvl();
+    	Double currentElvl = quote.getEnergyLevel() != null ? quote.getEnergyLevel().getElvl() : null;
     	if (currentElvl == null && quote.getBid() != null) {
     		currentElvl = quote.getBid();
     	}  else if (quote.getBid() == null && quote.getAsk() != null) {

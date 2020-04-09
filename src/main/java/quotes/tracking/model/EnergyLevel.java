@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import quotes.tracking.helper.QuoteFields;
 
 /**
@@ -16,6 +19,7 @@ import quotes.tracking.helper.QuoteFields;
  */
 @Entity
 @Table
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class EnergyLevel {
 	
     @Id

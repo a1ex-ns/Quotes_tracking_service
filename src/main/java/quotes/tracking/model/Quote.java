@@ -10,11 +10,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * @author Alexey Savchenko
  */
 @Entity
 @Table
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Quote {
 	
     @Id
@@ -42,9 +46,9 @@ public class Quote {
     @Override
     public String toString() {
     	return "Quote isin = " + isin
-    			+ "bid = " + bid
-    			+ "ask = " + ask
-    			+ "elvl = " + energyLevel.getElvl().toString();
+    			+ " bid = " + bid
+    			+ " ask = " + ask
+    			+ " elvl = " + energyLevel.getElvl().toString();
     }
     
     public Quote() {

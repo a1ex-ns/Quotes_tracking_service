@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import quotes.tracking.helper.URL;
 import quotes.tracking.model.Quote;
 import quotes.tracking.service.QuoteService;
@@ -31,7 +33,7 @@ public class QuoteController {
     /**
      * Accepts and processes quotes.
      */
-    @PostMapping(URL.QUOTES)
+    @PostMapping(value = URL.QUOTES, consumes = APPLICATION_JSON_VALUE)
     public void addQuote(@RequestBody Quote quote) {
     	quoteService.addQuote(quote);
     }
