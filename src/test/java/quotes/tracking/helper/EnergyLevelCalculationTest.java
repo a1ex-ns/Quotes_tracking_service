@@ -1,4 +1,4 @@
-package sberbank.quotes.tracking.service.helper;
+package quotes.tracking.helper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

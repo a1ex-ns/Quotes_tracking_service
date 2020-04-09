@@ -1,6 +1,7 @@
 package quotes.tracking.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -47,7 +48,7 @@ public class EnergyLevelController {
      * Returns energy level for the all quotes.
      */
     @GetMapping(URL.ALL_ENERGY_LEVEL)
-    public Iterable<Quote> getAllQuotes() {
+    public List<Quote> getAllQuotes() {
     	Map<String, Double> energyLevelMap = new HashMap<>();
     	quoteRepository.findAll().forEach(quote -> energyLevelMap.put(quote.getIsin(), quote.getEnergyLevel().getElvl()));
     	return quoteRepository.findAll();
