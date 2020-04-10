@@ -1,8 +1,6 @@
 package quotes.tracking.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import quotes.tracking.helper.QuoteFields;
 import quotes.tracking.helper.URL;
 import quotes.tracking.model.Quote;
-import quotes.tracking.repository.QuoteRepository;
+import quotes.tracking.service.EnergyLevelService;
 
 /**
  * The class represents the processing of requests for the /energyLevel URL.
@@ -27,11 +25,11 @@ public class EnergyLevelController {
     	
     }
     
-    private QuoteRepository quoteRepository;
+    private EnergyLevelService energyLevelService;
     
     @Autowired
-    public EnergyLevelController(QuoteRepository quoteRepository) {
-    	this.quoteRepository = quoteRepository;
+    public EnergyLevelController(EnergyLevelService energyLevelService) {
+    	this.energyLevelService = energyLevelService;
     }
     
     /**
@@ -41,16 +39,14 @@ public class EnergyLevelController {
      */
     @GetMapping(URL.ENERGY_LEVEL)
     public Optional<Quote> getEnergyLevelByIsin(@RequestParam(name = QuoteFields.ISIN, required = true) String isin) {
-        return  quoteRepository.findByIsin(isin);
+        return energyLevelService.getEnergyLevelByIsin(isin);
     }
     
     /**
      * Returns energy level for the all quotes.
      */
     @GetMapping(URL.ALL_ENERGY_LEVEL)
-    public List<Quote> getAllQuotes() {
-    	Map<String, Double> energyLevelMap = new HashMap<>();
-    	quoteRepository.findAll().forEach(quote -> energyLevelMap.put(quote.getIsin(), quote.getEnergyLevel().getElvl()));
-    	return quoteRepository.findAll();
+    public List<Quote> getAllEnergyLevels() {
+    	return energyLevelService.getAllEnergyLevels();
     }
 }
