@@ -27,10 +27,16 @@ public class EnergyLevelService {
         
     }
 
+    /**
+     * Returns energy level for a given name isin.
+     */
     public Optional<Quote> getEnergyLevelByIsin(String isin) {
         return quoteRepository.findByIsin(isin);
     }
     
+    /**
+     * Returns all energy levels.
+     */
     public List<Quote> getAllEnergyLevels() {
         return quoteRepository.findAll();
     }
