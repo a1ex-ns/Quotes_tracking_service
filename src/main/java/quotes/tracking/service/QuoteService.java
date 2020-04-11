@@ -4,8 +4,6 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +36,6 @@ public class QuoteService {
     /**
      * Adds a new quote or changes the value of the old one, if such a quote exists.
      */
-    @Transactional
     public void addQuote(Quote newQuote) {
     	if (QuoteValidator.isValid(newQuote)) {
     		Optional<Quote> optQuote = getQuote(newQuote.getIsin());

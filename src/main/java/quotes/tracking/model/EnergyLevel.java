@@ -26,7 +26,6 @@ public class EnergyLevel {
 	
     @Id
     @Column
-    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     

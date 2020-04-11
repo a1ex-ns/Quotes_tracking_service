@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Quote {
 	
     @Id
-    @JsonIgnore
     @Column
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -37,11 +36,9 @@ public class Quote {
     private String isin;
     
     @Column
-    @JsonIgnore
     private Double bid;
     
     @Column
-    @JsonIgnore
     private Double ask;
     
     @Override
