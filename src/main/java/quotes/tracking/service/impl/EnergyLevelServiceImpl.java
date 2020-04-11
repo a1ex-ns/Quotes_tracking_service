@@ -1,11 +1,16 @@
 package quotes.tracking.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import quotes.tracking.dto.QuoteDTO;
 import quotes.tracking.model.Quote;
 import quotes.tracking.repository.QuoteRepository;
 import quotes.tracking.service.EnergyLevelService;
@@ -15,6 +20,8 @@ import quotes.tracking.service.EnergyLevelService;
  */
 @Service
 public class EnergyLevelServiceImpl implements EnergyLevelService {
+    Logger logger = Logger.getLogger(EnergyLevelServiceImpl.class.getName());
+    
     private QuoteRepository quoteRepository;
     
     @Autowired
@@ -26,11 +33,24 @@ public class EnergyLevelServiceImpl implements EnergyLevelService {
         
     }
 
-    public Optional<Quote> getEnergyLevelByIsin(String isin) {
-        return quoteRepository.findByIsin(isin);
+    public QuoteDTO getEnergyLevelByIsin(String isin) {
+        Optional<Quote> quoteOpt = quoteRepository.findByIsin(isin);
+        if (quoteOpt.isPresent()) {
+            return convertQuoteEntityToQuoteDTO(quoteOpt.get());
+        } else {
+            logger.log(Level.WARNING, "The quote " + isin + " is not found.");
+            return null;
+        }
     }
     
-    public List<Quote> getAllEnergyLevels() {
-        return quoteRepository.findAll();
+    public List<QuoteDTO> getAllEnergyLevels() {
+        List<QuoteDTO> quoteDTOList = new ArrayList<>();
+        quoteRepository.findAll().forEach(quote -> quoteDTOList.add(convertQuoteEntityToQuoteDTO(quote)));
+        return quoteDTOList;
+    }
+    
+    private QuoteDTO convertQuoteEntityToQuoteDTO(Quote quote) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(quote, QuoteDTO.class);
     }
 }

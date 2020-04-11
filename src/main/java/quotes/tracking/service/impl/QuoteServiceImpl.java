@@ -41,16 +41,16 @@ public class QuoteServiceImpl implements QuoteService {
     			quote.setBid(newQuote.getBid());
     			quote.getEnergyLevel().setElvl(EnergyLevelCalculation.elvlCalculation(quote));
     			saveQuote(quote);
-    			logger.log(Level.INFO, "Quote changed {}", newQuote);
+    			logger.log(Level.INFO, "Quote changed " + newQuote.getIsin());
     		} else {
     			EnergyLevel energyLevel = new EnergyLevel();
     			energyLevel.setElvl(EnergyLevelCalculation.elvlCalculation(newQuote));
     			newQuote.setEnergyLevel(energyLevel);
     			saveQuote(newQuote);
-    			logger.log(Level.INFO, "Save new quote {}", newQuote);
+    			logger.log(Level.INFO, "Save new quote " + newQuote.getIsin());
     		}
     	} else {
-    		logger.log(Level.WARNING, "The quote {} is not valid.", newQuote);
+    		logger.log(Level.WARNING, "The quote " + newQuote.getIsin() + " is not valid.");
     	}
     }
     

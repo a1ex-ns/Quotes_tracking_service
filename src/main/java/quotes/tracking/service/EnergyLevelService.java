@@ -1,9 +1,8 @@
 package quotes.tracking.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import quotes.tracking.model.Quote;
+import quotes.tracking.dto.QuoteDTO;
 
 /**
  * Service for processing energy level.
@@ -15,11 +14,11 @@ public interface EnergyLevelService {
     /**
      * Returns energy level for a given name isin.
      */
-    public Optional<Quote> getEnergyLevelByIsin(String isin);
+    public QuoteDTO getEnergyLevelByIsin(String isin);
     
     /**
      * Returns all energy levels.
      */
-    public List<Quote> getAllEnergyLevels();
+    public List<QuoteDTO> getAllEnergyLevels();
 
 }
