@@ -2,7 +2,6 @@ package quotes.tracking.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,9 +34,9 @@ public class EnergyLevelServiceImpl implements EnergyLevelService {
     }
 
     public QuoteDTO getEnergyLevelByIsin(String isin) {
-        Optional<Quote> quoteOpt = quoteRepository.findByIsin(isin);
-        if (quoteOpt.isPresent()) {
-            return convertQuoteEntityToQuoteDTO(quoteOpt.get());
+        Quote quote = quoteRepository.findByIsin(isin);
+        if (quote != null) {
+            return convertQuoteEntityToQuoteDTO(quote);
         } else {
             logger.log(Level.WARNING, "The quote " + isin + " is not found.");
             return null;

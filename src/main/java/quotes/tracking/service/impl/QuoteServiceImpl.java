@@ -1,6 +1,5 @@
 package quotes.tracking.service.impl;
 
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +14,8 @@ import quotes.tracking.repository.QuoteRepository;
 import quotes.tracking.service.QuoteService;
 
 /**
+ * The service is designed to process and save quotes
+ * 
  * @author Alexey Savchenko
  */
 @Service
@@ -34,9 +35,8 @@ public class QuoteServiceImpl implements QuoteService {
     
     public void addQuote(Quote newQuote) {
     	if (QuoteValidator.isValid(newQuote)) {
-    		Optional<Quote> optQuote = getQuote(newQuote.getIsin());
-    		if (optQuote.isPresent() && !optQuote.get().equals(newQuote)) {
-    			Quote quote = optQuote.get();
+    		Quote quote = getQuote(newQuote.getIsin());
+    		if (quote != null && !quote.equals(newQuote)) {
     			quote.setAsk(newQuote.getAsk());
     			quote.setBid(newQuote.getBid());
     			quote.getEnergyLevel().setElvl(EnergyLevelCalculation.elvlCalculation(quote));
@@ -58,7 +58,7 @@ public class QuoteServiceImpl implements QuoteService {
     	quoteRepository.save(quote);
     }
     
-    private Optional<Quote> getQuote(String isin) {
+    private Quote getQuote(String isin) {
     	return quoteRepository.findByIsin(isin);
     }
 }
