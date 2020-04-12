@@ -12,11 +12,11 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import quotes.tracking.helper.QuoteFields;
 
 /**
+ * The class is intended to describe the model quote for working with the database.
+ * 
  * @author Alexey Savchenko
  */
 @Entity
