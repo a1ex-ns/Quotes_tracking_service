@@ -22,7 +22,8 @@ public class QuoteValidator {
      * 		   <b>false</b> - the quote is not valid
      */
     public static boolean isValid(Quote quote) {
-    	return quote.getBid() != null
+    	return quote.getIsin() != null
+    	        && quote.getBid() != null
     			&& quote.getAsk() != null
     			&& quote.getBid() < quote.getAsk() 
     			&& quote.getIsin().length() == QUOTE_ISIN_LENGHT;

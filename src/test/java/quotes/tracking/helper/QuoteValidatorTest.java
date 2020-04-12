@@ -51,4 +51,12 @@ public class QuoteValidatorTest {
         
         assertTrue(QuoteValidator.isValid(quote));
     }
+    
+    @Test
+    public void shouldReturnFalseIfIsinNameNull() {
+        quote.setAsk(20.0);
+        quote.setBid(10.0);
+        
+        assertFalse(QuoteValidator.isValid(quote));
+    }
 }
