@@ -23,6 +23,7 @@ public class EnergyLevelServiceImpl implements EnergyLevelService {
     Logger logger = Logger.getLogger(EnergyLevelServiceImpl.class.getName());
     
     private QuoteRepository quoteRepository;
+    private ModelMapper modelMapper = new ModelMapper();
     
     @Autowired
     public EnergyLevelServiceImpl(QuoteRepository quoteRepository) {
@@ -50,7 +51,6 @@ public class EnergyLevelServiceImpl implements EnergyLevelService {
     }
     
     private QuoteDTO convertQuoteEntityToQuoteDTO(Quote quote) {
-        ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(quote, QuoteDTO.class);
     }
 }
