@@ -22,6 +22,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Quote {
+    public static final String ID = "id";
+    public static final String ISIN = "isin";
+    public static final String BID = "bid";
+    public static final String ASK = "ask";
+    public static final String ENERGY_LEVEL = "energyLevel";
 	
     @Id
     @Column

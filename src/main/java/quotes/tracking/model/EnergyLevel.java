@@ -12,8 +12,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import quotes.tracking.helper.QuoteFields;
-
 /**
  * The class is intended to describe the model quote for working with the database.
  * 
@@ -29,7 +27,7 @@ public class EnergyLevel {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     
-    @OneToOne(optional = false, mappedBy = QuoteFields.ENERGY_LEVEL, cascade = CascadeType.ALL)
+    @OneToOne(optional = false, mappedBy = Quote.ENERGY_LEVEL, cascade = CascadeType.ALL)
     private Quote quote;
     
     @Column
